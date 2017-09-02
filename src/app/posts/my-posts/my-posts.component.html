@@ -1,0 +1,13 @@
+<md-card>
+  <div class="card-{{size}}">
+    <div class="thumb-{{size}}" [class.selected]="my_item.selected">
+      <div class="image-container-{{size}}">
+        <img class="image-{{size}}" src="{{my_item.image}}" />
+      </div>
+      <div class="myid"><span>{{my_item.id}}</span></div>
+      <div class="info pos-bottom">
+        <div class="deviceText-{{size}}"><span>{{my_item.title}}</span></div>
+      </div>
+    </div>
+  </div>
+</md-card>
