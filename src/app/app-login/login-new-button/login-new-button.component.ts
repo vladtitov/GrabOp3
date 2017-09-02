@@ -13,7 +13,11 @@ export class LoginNewButtonComponent implements OnInit {
 
   selectedOption: string;
 
-  constructor(private dialog: MdDialog, loginNewService: LoginNewService, private modal: ModalWindowService ) { }
+  constructor(
+    private dialog: MdDialog,
+    loginNewService: LoginNewService,
+    private modal: ModalWindowService
+  ) { }
 
   ngOnInit() {  }
 

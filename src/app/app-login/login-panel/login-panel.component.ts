@@ -4,11 +4,11 @@ import {MdDialogRef} from '@angular/material';
 import {SOAuthenticateResponse} from '../../models/sos';
 // import {LoginService} from '../login.service';
 import {Router} from '@angular/router';
-import {ModalWindowService} from '../../services/modal-window.service';
+//import {ModalWindowService} from '../../services/modal-window.service';
 import {Observable} from 'rxjs/Observable';
 import {VOUser} from '../vouser';
 import {AuthHttpMy} from '../auth-http';
-import {FormControl} from '@angular/forms';
+//import {FormControl} from '@angular/forms';
 // import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
@@ -35,10 +35,10 @@ export class LoginPanelComponent implements OnInit {
   login = {username: 'al3kosvh@gmail.com', password: 'mio,mio'};
 
   constructor(
-    public dialogRef: MdDialogRef<LoginPanelComponent>,
+    //public dialogRef: MdDialogRef<LoginPanelComponent>,
     private loginService: AuthHttpMy,
-    private router: Router, // doing nothing for now
-    private modal: ModalWindowService // TODO remove dependency of ModalWindow
+   // private router: Router, // doing nothing for now
+   // private modal: ModalWindowService // TODO remove dependency of ModalWindow
   ) {
     this.user$ = loginService.user$;
   }
@@ -47,7 +47,7 @@ export class LoginPanelComponent implements OnInit {
   }
 
   onCloseClick() {
-    this.modal.closeWindow('close button clicked '); // parameter just for testing
+   // this.modal.closeWindow('close button clicked '); // parameter just for testing
   }
 
   onSubmit(): void {
@@ -55,7 +55,7 @@ export class LoginPanelComponent implements OnInit {
     this.loginService.login(this.login.username, this.login.password).subscribe(res => {
       if(res){
         this.fullName = res.firstName + ' ' + res.lastName;
-        setTimeout(()=>this.modal.closeWindow('login success'), 3000);
+        //setTimeout(()=>this.modal.closeWindow('login success'), 3000);
       }
       else console.error(' error login');
       });

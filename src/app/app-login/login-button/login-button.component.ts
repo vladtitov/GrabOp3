@@ -13,16 +13,25 @@ export class LoginButtonComponent implements OnInit {
 
   selectedOption: string;
 
-  constructor(private dialog: MdDialog, private modal: ModalWindowService ) { }
+  constructor(
+    private dialog: MdDialog
+   // private modal: ModalWindowService
+  ) { }
+
   ngOnInit() {
 
   }
 
   loginClick(evt){
 
-    this.modal.openWindow(LoginPanelComponent, (res) => {
+    this.dialog.open(LoginPanelComponent, {
+      width:'400px'
+    })
+
+
+    /*this.modal.openWindow(LoginPanelComponent, (res) => {
       console.log('LoginPanelComponent  ', res);
-    });
+    });*/
   }
 
 }
