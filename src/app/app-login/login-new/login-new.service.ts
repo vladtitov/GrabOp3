@@ -25,16 +25,17 @@ export class LoginNewService {
       // http.user$.subscribe(res=>this.userExt = res);
     }
 
-    isUserExists(value: any, column: string): Promise<VOResult> {
+    /*isUserExists(value: any, column: string): Promise<VOResult> {
+
         var url: string = VOSettings.login + '/exists/' + column;
         return this.http.post(url, value).toPromise().then(
             res => {
                 return new VOResult(res.json())
             }
         )
-    }
+    }*/
 
-  register(newUser: VOUserExt): Observable<VOUserExt> {
+ /* register(newUser: VOUserExt): Observable<VOUserExt> {
     // let url: string = 'http://ec2-34-209-89-37.us-west-2.compute.amazonaws.com/api/v1/register?format=json';
     let url: string = VOSettings.register;;
 
@@ -48,7 +49,7 @@ export class LoginNewService {
         user.password = newUser.password;
       return user;
     }).catch(this.handleError);
-  }
+  }*/
 
   verifyEmail(token: string){
     // let url: string = 'http://ec2-34-209-89-37.us-west-2.compute.amazonaws.com/api/v1/verifyemail?format=json';

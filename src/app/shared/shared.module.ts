@@ -16,8 +16,9 @@ import {RouterModule} from '@angular/router';
 import {ModalAlertComponent} from './modal-alert/modal-alert.component';
 import {ModalPromptComponent} from './modal-prompt/modal-prompt.component';
 import {FormsModule} from '@angular/forms';
-import {PostsCard} from './posts-card';
-import {PostsList} from './posts-list';
+import {MembersListComponent} from './member-list/members-list.component';
+import {LoginButtonComponent} from '../app-login/login-button/login-button.component';
+import {LoginNewButtonComponent} from '../app-login/login-new-button/login-new-button.component';
 
 
 
@@ -38,7 +39,9 @@ import {PostsList} from './posts-list';
     PostsCardComponent,
     ListRow,
     ModalAlertComponent,
-    ModalPromptComponent
+    ModalPromptComponent,
+    LoginButtonComponent,
+    LoginNewButtonComponent
   ],
   declarations: [
     PostsCardComponent,
@@ -47,8 +50,9 @@ import {PostsList} from './posts-list';
     ListRow,
     ModalAlertComponent,
     ModalPromptComponent,
-    PostsCard,
-    PostsList
+    MembersListComponent,
+    LoginButtonComponent,
+    LoginNewButtonComponent
   ]
   ,providers:[
    // PostEditService,

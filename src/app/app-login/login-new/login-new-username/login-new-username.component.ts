@@ -69,7 +69,7 @@ export class LoginNewUsernameComponent implements OnInit,  OnDestroy {
   }
 
   onSubmit(): void {
-    this.loginNewService.register(this.person).subscribe(res => {
+   /* this.loginNewService.register(this.person).subscribe(res => {
       if (res.id) {
         console.log('onSubmit register res ', res);
         this.dialog.open(ModalAlertComponent, {data: 'Go to email confirm'});
@@ -83,6 +83,7 @@ export class LoginNewUsernameComponent implements OnInit,  OnDestroy {
       this.dialog.open(ModalAlertComponent, {data: 'Username already exists'});
 
     });
+    */
   }
 
   // openModalDialog(){

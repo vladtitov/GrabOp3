@@ -8,6 +8,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class MyPostsComponent implements OnInit {
 
+  size = 128;
+  myItem:any = {};
 
   constructor() { }
 

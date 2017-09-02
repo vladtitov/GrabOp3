@@ -74,7 +74,7 @@ export class AuthHttpMy {
 
   convertSessionToToken() {
 
-    let url: string = VOSettings.server + 'session-to-token' + VOSettings.format_json;
+    let url: string = VOSettings.server + 'session-to-token?format=json';
     this.http.post(url, {}).toPromise().then(res => console.log('session-to-token:', res));
   }
 

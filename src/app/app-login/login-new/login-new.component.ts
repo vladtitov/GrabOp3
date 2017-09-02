@@ -9,8 +9,8 @@ import {LoginNewService} from './login-new.service';
 })
 export class LoginNewComponent implements OnInit {
 
- // isIn:boolean;
- // isVisible:boolean = true;
+  isIn:boolean;
+  isVisible:boolean = true;
 
   constructor(private router:Router, private loginNewService:LoginNewService){
 

@@ -14,6 +14,9 @@ import {CheckEmailDirective} from './login-validators/check-email.directive';
 import {LoginRecoveryComponent} from './login-recovery/login-recovery.component';
 import {MaterialModuleApp} from '../shared/material-app.module';
 import {LoginNewCompanyComponent} from './login-new/login-new-company/login-new-company.component';
+import {LoginPanelComponent} from './login-panel/login-panel.component';
+// import {LoginButtonComponent} from './login-button/login-button.component';
+// import {LoginNewButtonComponent} from './login-new-button/login-new-button.component';
 
 
 
@@ -46,7 +49,9 @@ const homeRoute: Routes = [
     LoginRecoveryComponent,
     ValidateEmailDirective,
     CheckEmailDirective,
-    LoginNewCompanyComponent
+    LoginNewCompanyComponent,
+    LoginPanelComponent
+
   ],
   providers: [UploadService]
 })

@@ -313,7 +313,8 @@ export class VOSettings {
 
   //static username: any = {password: 'mio,mio', username: 'al3kosvh@gmail.com'};
  // static authUrl: string = VOSettings.server +'/auth?format=json';
-  //static register: string = VOSettings.server +'/register?format=json';
+
+  static register: string = VOSettings.server +'/register?format=json';
   static verifyemail: string = VOSettings.server +'/verifyemail?format=json';
   static getMyPosts: string = VOSettings.server + '/services/myservices?format=json';
   static getPosts: string = VOSettings.server + '/profiles/{{id}}/services?format=json';
@@ -325,8 +326,6 @@ export class VOSettings {
 
   static updateProfile: string = VOSettings.server + '/profiles/{{id}}/?format=json';
 
-  static format_json: string = '?format=json';
-  static login: string = 'auth';
   static myProfile: string = VOSettings.server+'/profiles/me?format=json';
   static profile: string = VOSettings.server+'/profiles/{{id}}?format=json';
   static connection_GetProfileConnectionsCount: string = VOSettings.server + '/profiles/{{id}}/connectionsCount/?format=json';
@@ -350,7 +349,7 @@ export class VOSettings {
   static images_small: string = 'http://res.cloudinary.com/al3kosvh/image/upload/';
   static statistics: string = 'api/get_statistics.php';
 
-  static _user: VOUser;
+  //static _user: VOUser;
 
   //
   // static  set user_id(user_id: number) {
@@ -371,10 +370,6 @@ export class VOResult {
   success: string;
   insertId: number;
   message: string;
-
-  constructor(obj: any) {
-    for (let str in obj)this[str] = obj[str];
-  }
 }
 
 

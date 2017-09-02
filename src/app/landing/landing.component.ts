@@ -11,7 +11,7 @@ import {LoginPanelComponent} from '../app-login/login-panel/login-panel.componen
 })
 export class LandingComponent implements OnInit {
 
-  private summaryData: any[] = [
+  summaryData: any[] = [
     {
       Image: 'assets/img/search-opportunities.png',
       Text: 'Find jobs, products, services and talent'

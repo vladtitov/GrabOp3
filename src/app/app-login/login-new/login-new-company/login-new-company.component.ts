@@ -13,6 +13,11 @@ export class LoginNewCompanyComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+  }
+
+  onSubmit(){
+
   }
 
 }

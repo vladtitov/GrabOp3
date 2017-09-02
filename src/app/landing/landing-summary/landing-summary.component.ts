@@ -7,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class LandingSummaryComponent implements OnInit {
 
-  @Input() private imageData: any[] = [];
+  @Input() imageData: any[] = [];
   constructor() { }
 
   ngOnInit() {
