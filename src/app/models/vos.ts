@@ -311,9 +311,9 @@ export class VOSettings {
   static server: string = 'http://grabop2api-dev.us-west-2.elasticbeanstalk.com/api/v1';
   // static server: string = 'http://ec2-34-209-89-37.us-west-2.compute.amazonaws.com/api/v1';
 
-  static username: any = {password: 'mio,mio', username: 'al3kosvh@gmail.com'};
-  static authUrl: string = VOSettings.server +'/auth?format=json';
-  static register: string = VOSettings.server +'/register?format=json';
+  //static username: any = {password: 'mio,mio', username: 'al3kosvh@gmail.com'};
+ // static authUrl: string = VOSettings.server +'/auth?format=json';
+  //static register: string = VOSettings.server +'/register?format=json';
   static verifyemail: string = VOSettings.server +'/verifyemail?format=json';
   static getMyPosts: string = VOSettings.server + '/services/myservices?format=json';
   static getPosts: string = VOSettings.server + '/profiles/{{id}}/services?format=json';

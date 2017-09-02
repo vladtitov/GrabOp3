@@ -10,15 +10,23 @@ import {Observable}     from 'rxjs/Observable';
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {mapUserExt, SOAuthenticateResponse, SOvAccount, VOUser, VOUserExt} from "./vouser";
 import {Subject} from 'rxjs/Subject';
-import {VOSettings} from "app/models/vos";
+import {VOSettings} from "../models/vos";
+
+
+
 
 @Injectable()
 export class AuthHttpMy {
   //auth:string;
   headers: Headers;
 
+  private isLogedInSub:BehaviorSubject<boolean>
+  isLogedIn$:Observable<boolean>;
+
+
   private userSub: BehaviorSubject<VOUser>;
   user$: Observable<VOUserExt>;
+
   private user: VOUser;
   userExt: VOUserExt = new VOUserExt();
 
@@ -28,13 +36,17 @@ export class AuthHttpMy {
 //
   //{"id":16,"username":"al3kosvh@gmail.com","sessionId":"ILO5TXx1Gf5jpXn8UZMV"}
 
-  authenticatedSub: Subject<boolean>;
-  authenticated$: Observable<boolean>;
+  //authenticatedSub: Subject<boolean>;
+  //authenticated$: Observable<boolean>;
 
   constructor(private http: Http) {
 
-    this.authenticatedSub = new BehaviorSubject<boolean>(false);
-    this.authenticated$ = this.authenticatedSub.asObservable();
+    this.isLogedInSub = new BehaviorSubject(false);
+    this.isLogedIn$ = this.isLogedInSub.asObservable();
+
+   // this.authenticatedSub = new BehaviorSubject<boolean>(false);
+    //this.authenticated$ = this.authenticatedSub.asObservable();
+
     this.userSub = new BehaviorSubject<VOUser>(this.userExt);
     this.user$ = this.userSub.asObservable();
 
@@ -46,9 +58,13 @@ export class AuthHttpMy {
   }
 
   autoLogin(): void {
-    let user: VOUser = this.readUser();
+    let user: VOUser = this.getUser();
     //TODO if expired error
     console.log(user);
+    if(!this.user){
+      return;
+    }
+    if(user) this.loginUser(user);
     this.getUsersExtended(user).subscribe(user => {
       //console.log(user);
       this.userSub.next(user);
@@ -57,12 +73,20 @@ export class AuthHttpMy {
   }
 
   convertSessionToToken() {
+
     let url: string = VOSettings.server + 'session-to-token' + VOSettings.format_json;
     this.http.post(url, {}).toPromise().then(res => console.log('session-to-token:', res));
   }
 
   logout() {
-    localStorage.removeItem("account");
+
+    let url: string = VOSettings.server + '/logout?format=json';
+    this.get(url).map(res=>res.json()).subscribe(res=>{
+
+      this.isLogedInSub.next(false);
+    })
+
+    //localStorage.removeItem("account");
   }
 
 
@@ -71,7 +95,7 @@ export class AuthHttpMy {
     let sub: Subject<VOUserExt> = new Subject();
 
     // let url: string = 'http://ec2-34-209-89-37.us-west-2.compute.amazonaws.com/api/v1/auth?format=json';
-    let url: string = VOSettings.authUrl;
+    let url: string = VOSettings.server + '/auth?format=json';
 
     console.log(username, password);
 //console.log(this.http.post(url, {username,password}));
@@ -89,7 +113,10 @@ export class AuthHttpMy {
     }).catch(this.handleError).subscribe(user => {
 
       ///TODO make sure user is valid
-      this.saveUser(user);
+
+
+      this.loginUser(user);
+      this.saveUser();
 
       this.getUsersExtended(user).subscribe(
         user => {
@@ -147,12 +174,12 @@ export class AuthHttpMy {
   }
 
 
-  readUser(): VOUser {
+  getUser(): VOUser {
     // if(!this.us)
     if (!this.user) {
       let str = localStorage.getItem('authentication');
       try {
-        if (str) this.user = mapUserExt(JSON.parse(atob(str)));  //   new VOUser(JSON.parse(atob(str)));
+        if (str) this.user = JSON.parse(atob(str));  //   new VOUser(JSON.parse(atob(str)));
       } catch (e) {
         this.removeAuthentication();
       }
@@ -160,14 +187,17 @@ export class AuthHttpMy {
     return this.user;
   }
 
-  saveUser(user: VOUser): void {
-    // this.user = user;
-    localStorage.setItem('authentication', btoa(JSON.stringify(user)));
-    this.authenticatedSub.next(true);
+  saveUser(): void {
+    localStorage.setItem('authentication', btoa(JSON.stringify(this.user)));
+    //this.authenticatedSub.next(true);
   }
 
+  loginUser(user?: VOUser){
+    this.user = user
+    this.isLogedInSub.next(true);
+  }
   getToken(): string {
-    let user: VOUser = this.readUser();
+    let user: VOUser = this.getUser();
     return user ? user.token : null;
   }
 
@@ -193,7 +223,8 @@ export class AuthHttpMy {
 
   removeAuthentication(): void {
     this.userExt = null;
-    this.authenticatedSub.next(false);
+    this.isLogedInSub.next(false);
+    //this.authenticatedSub.next(false);
     localStorage.removeItem('authentication');
   }
 
