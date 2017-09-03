@@ -96,12 +96,10 @@ export class AuthHttpMy {
 
     // let url: string = 'http://ec2-34-209-89-37.us-west-2.compute.amazonaws.com/api/v1/auth?format=json';
     let url: string = VOSettings.server + '/auth?format=json';
-
-    console.log(username, password);
-//console.log(this.http.post(url, {username,password}));
-    this.post(url, {username, password}).map(res => {
+console.log(url, username, password);
+    this.http.post(url, {username:username, password:password}).map(res => {
       let r: SOAuthenticateResponse = res.json();
-      //console.log(r);
+      console.log(r);
 
       let user: VOUser = new VOUser();
       user.id = r.UserId;

@@ -31,14 +31,12 @@ export class LoginPanelComponent implements OnInit {
   user$: Observable<VOUser>;
   fullName: string;
 
-  // login = {username: 'al3kosvh@gmail.com', password: 'mio,mio'};
+
   login = {username: 'al3kosvh@gmail.com', password: 'mio,mio'};
 
   constructor(
-    //public dialogRef: MdDialogRef<LoginPanelComponent>,
     private loginService: AuthHttpMy,
-   // private router: Router, // doing nothing for now
-   // private modal: ModalWindowService // TODO remove dependency of ModalWindow
+
   ) {
     this.user$ = loginService.user$;
   }
@@ -51,6 +49,7 @@ export class LoginPanelComponent implements OnInit {
   }
 
   onSubmit(): void {
+
 
     this.loginService.login(this.login.username, this.login.password).subscribe(res => {
       if(res){
