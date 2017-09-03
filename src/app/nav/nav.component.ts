@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthHttpMy} from '../app-login/auth-http';
+import {AuthHttpMy} from '../services/auth-http';
 import {HelpComponent} from './help/help.component';
 import {ModalWindowService} from '../services/modal-window.service';
 

@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {VOPost} from '../../models/vos';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MyPostsService} from '../my-posts.service';
-import {AuthHttpMy} from '../../app-login/auth-http';
+import {AuthHttpMy} from '../../services/auth-http';
 import {VOUserExt} from '../../app-login/vouser';
 
 @Component({

@@ -10,7 +10,7 @@ import { VOSettings, VOResult, VOProfileSettings} from "../../models/vos";
 import {FormControl} from "@angular/forms";
 import {SOAuthenticate, SOAuthenticateResponse, SOResponseStatus, SORegister, SORegisterResponse} from "../../models/sos";
 import {VOUser, VOUserExt} from '../vouser';
-import {AuthHttpMy} from '../auth-http';
+import {AuthHttpMy} from '../../services/auth-http';
 import {Router} from '@angular/router';
 
 

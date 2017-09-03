@@ -8,7 +8,7 @@ import {
 } from '@angular/http';
 import {Observable}     from 'rxjs/Observable';
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import {mapUserExt, SOAuthenticateResponse, SOvAccount, VOUser, VOUserExt} from "./vouser";
+import {mapUserExt, SOAuthenticateResponse, SOvAccount, VOUser, VOUserExt} from "../app-login/vouser";
 import {Subject} from 'rxjs/Subject';
 import {VOSettings} from "../models/vos";
 

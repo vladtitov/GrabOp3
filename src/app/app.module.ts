@@ -13,7 +13,7 @@ import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app.routes';
-import {AuthHttpMy} from './app-login/auth-http';
+
 
 
 /*
@@ -24,6 +24,12 @@ import {LandingAllianceComponent } from './landing/landing-alliance/landing-alli
 */
 
 
+import {MyPostsService} from './posts/my-posts.service';
+import {AuthHttpMy} from './services/auth-http';
+import {UploadService} from './services/upload.service';
+
+
+import {LoginPanelComponent} from './app-login/login-panel/login-panel.component';
 
 /*import { LoginButtonComponent } from './app-login/login-button/login-button.component';
 import { LoginPanelComponent } from './app-login/login-panel/login-panel.component';*/
@@ -39,7 +45,7 @@ import {MySharedModule} from "./shared/shared.module";
 // import {UserEditComponent} from "./user-edit/user-edit.component";
 // import {UserEditModule} from "./user-edit/user-edit.module";
 // import {SearchAdvancedService} from './search-advanced/search-advanced.service';
-import {MyPostsService} from './posts/my-posts.service';
+
 // import {HomeModule} from './home/home.module';
 import {PipesModule} from './pipes/pipes.module';
 import {PostsFilterPipe} from './pipes/posts-filter.pipe';
@@ -64,6 +70,7 @@ import 'rxjs/add/operator/toPromise';
   declarations: [
     AppComponent,
     GrabopFooterComponent,
+    LoginPanelComponent
    // LogoutButtonComponent,
     // PostEditComponent
     // ModalAlertComponent,
@@ -90,7 +97,8 @@ import 'rxjs/add/operator/toPromise';
   ],
   providers: [
     AuthHttpMy,
-   //  LoginNewService,
+    UploadService,
+    //  LoginNewService,
   //  UserEditService,
    //  ModalWindowService,
   //  SearchAdvancedService,
@@ -99,7 +107,7 @@ import 'rxjs/add/operator/toPromise';
     {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   entryComponents: [
-  //   LoginPanelComponent,
+    LoginPanelComponent
    // UserEditComponent
   ],
   bootstrap: [AppComponent]

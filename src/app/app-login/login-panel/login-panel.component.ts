@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 //import {ModalWindowService} from '../../services/modal-window.service';
 import {Observable} from 'rxjs/Observable';
 import {VOUser} from '../vouser';
-import {AuthHttpMy} from '../auth-http';
+import {AuthHttpMy} from '../../services/auth-http';
 //import {FormControl} from '@angular/forms';
 // import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 

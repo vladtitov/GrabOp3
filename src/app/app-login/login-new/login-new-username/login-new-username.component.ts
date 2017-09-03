@@ -11,9 +11,9 @@ import {CheckEmailDirective} from '../../login-validators/check-email.directive'
 import {ModalWindowService} from '../../../services/modal-window.service';
 import {MdDialog} from '@angular/material';
 import {ModalAlertComponent} from '../../../shared/modal-alert/modal-alert.component';
-import {UploadService} from '../../../shared/upload.service';
+import {UploadService} from '../../../services/upload.service';
 import {RequestOptions} from '@angular/http';
-import {AuthHttpMy} from '../../auth-http';
+import {AuthHttpMy} from '../../../services/auth-http';
 
 
 @Component({

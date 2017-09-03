@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthHttpMy} from '../../auth-http';
+import {AuthHttpMy} from '../../../services/auth-http';
 import {ModalAlertComponent} from '../../../shared/modal-alert/modal-alert.component';
 import {MdDialog} from '@angular/material';
 //import {UserEditService} from '../../../user-edit/user-edit.service';

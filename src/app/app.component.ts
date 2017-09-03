@@ -1,14 +1,14 @@
 import {Component, Directive} from '@angular/core';
-import {AuthHttpMy} from './app-login/auth-http';
+import {AuthHttpMy} from './services/auth-http';
 import {VOUserExt} from './app-login/vouser';
-import {trigger, state, style, transition, animate, keyframes, group} from '@angular/animations';
+//import {trigger, state, style, transition, animate, keyframes, group} from '@angular/animations';
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  animations: [
+ /* animations: [
     trigger('routerAnimationRight', [
       state('in', style({
         transform: 'translate3d(0, 0, 0)'
@@ -19,7 +19,7 @@ import {trigger, state, style, transition, animate, keyframes, group} from '@ang
       transition('in => out', animate('400ms ease-in-out')),
       transition('out => in', animate('400ms ease-in-out'))
     ]),
-  ]
+  ]*/
 })
 export class AppComponent {
   title = 'AppComponent ';
@@ -37,14 +37,14 @@ export class AppComponent {
     // console.log('appp');
   }
 
-  prepareRouter(outlet){
-    const animation = outlet.activatedRouteData['animation'] || {};
-    return animation['value'] || null;
+ // prepareRouter(outlet){
+    //const animation = outlet.activatedRouteData['animation'] || {};
+   // return animation['value'] || null;
     // let a = r.activeRoute ? r.activeRoute.config.animations : '';
     // console.log('prepareRouter', a);
     // return a;
     // return r.activeRoute ? r.activeRoute.config.animations : '';
-  }
+ // }
 
   // prepareRouteTransition(r) {
   //   const animation = r.activatedRouteData['animation'] || {};

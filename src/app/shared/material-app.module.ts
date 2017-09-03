@@ -10,7 +10,9 @@ import {
   MdMenuModule,
   MdSidenavModule,
   MdSlideToggleModule,
-  MdRadioModule, MdToolbarModule, MdTabsModule
+  MdRadioModule,
+  MdToolbarModule,
+  MdTabsModule
 } from "@angular/material";
 
 
@@ -28,7 +30,8 @@ import {
     MdSlideToggleModule,
     MdRadioModule,
     MdToolbarModule,
-    MdTabsModule
+    MdTabsModule,
+    MdDialogModule
   ],
   exports: [
     MdButtonModule,
@@ -43,7 +46,8 @@ import {
     MdSlideToggleModule,
     MdRadioModule,
     MdToolbarModule,
-    MdTabsModule
+    MdTabsModule,
+    MdDialogModule
 
   ]
 })

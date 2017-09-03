@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AuthHttpMy} from '../app-login/auth-http';
+import {AuthHttpMy} from './auth-http';
 import {VOSettings} from '../models/vos';
 import {Observable} from 'rxjs/Observable';
 import {VOUserExt} from '../app-login/vouser';

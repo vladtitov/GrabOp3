@@ -4,21 +4,14 @@
         <md-grid-tile>
             <button md-button (click)="onCloseClick()">X</button>
         </md-grid-tile>
-        <!--<md-grid-tile><a (click)="onCloseClick()" class="btn">X</a></md-grid-tile>-->
+
     </md-grid-list>
 
 
     <div>
         <p *ngIf="fullName">Hello {{fullName}}</p>
     </div>
-    <form #f="ngForm" (ngSubmit)="signUp()" autocomplete="off" novalidate>
-
-        <!--<md-input-container>-->
-        <!--<input mdInput placeholder="Username" name="username" [(ngModel)]="login.username" required minlength="6">-->
-        <!--</md-input-container>-->
-        <!--<md-input-container>-->
-        <!--<input mdInput placeholder="Password" name="password" [(ngModel)]="login.password" required minlength="5">-->
-        <!--</md-input-container>-->
+    <form #f="ngForm" autocomplete="off" novalidate>
         <md-list>
             <md-list-item>
                 <md-input-container>
@@ -30,7 +23,6 @@
                            #username="ngModel">
                 </md-input-container>
             </md-list-item>
-            <!--<input   placeholder="Password" name="password"  [(ngModel)]="login.password" required minlength="5">-->
             <md-input-container>
                 <input mdInput
                        placeholder="Password"
@@ -45,20 +37,6 @@
             <md-checkbox [ngModelOptions]="{standalone: true}" [(ngModel)]="showPass">Show password</md-checkbox>
 
 
-            <!--<md-grid-list cols="1" rowHeight="40px">-->
-            <!--<md-grid-tile><a md-raised-button color="primary" routerLink="/join-us" (click)="onSubmit()">SIGN IN</a></md-grid-tile>-->
-            <!--<md-grid-tile>OR</md-grid-tile>-->
-            <!--<md-grid-tile><a md-raised-button color="primary" routerLink="/join-us"-->
-            <!--(click)="window.location='http://grabopwsdev.azurewebsites.net/auth/facebook'">LOGIN WITH FACEBOOK</a></md-grid-tile>-->
-            <!--</md-grid-list>-->
-
-            <!--<md-grid-list cols="3" rowHeight="70px">-->
-            <!--<md-grid-tile><a md-raised-button color="primary" routerLink="/join-us" (click)="onSubmit()">SIGN IN</a></md-grid-tile>-->
-            <!--<md-grid-tile>OR</md-grid-tile>-->
-            <!--<md-grid-tile><a md-raised-button color="primary" routerLink="/join-us"-->
-            <!--(click)="window.location='http://grabopwsdev.azurewebsites.net/auth/facebook'">LOGIN WITH FACEBOOK</a></md-grid-tile>-->
-            <!--</md-grid-list>-->
-
             <div class='row'>
                 <button md-raised-button color="accent" [class.disabled]="!f.valid" (click)="onSubmit()">
                     Sign In
@@ -69,6 +47,5 @@
                 </div>
             </div>
         </md-list>
-        <!--<div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>-->
     </form>
 </div>

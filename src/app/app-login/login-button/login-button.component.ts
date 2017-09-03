@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MdDialog} from '@angular/material';
 import {LoginPanelComponent} from '../login-panel/login-panel.component';
-import {ModalWindowService} from '../../services/modal-window.service';
+// import {ModalWindowService} from '../../services/modal-window.service';
 
 
 @Component({
@@ -25,7 +25,8 @@ export class LoginButtonComponent implements OnInit {
   loginClick(evt){
 
     this.dialog.open(LoginPanelComponent, {
-      width:'400px'
+      width:'400px',
+      height:'400px'
     })
 
 
