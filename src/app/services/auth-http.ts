@@ -23,7 +23,7 @@ export class AuthHttpMy {
   isLogedIn$:Observable<boolean>;
   private userSub: BehaviorSubject<VOUserExt>;
   user$: Observable<VOUserExt>;
-  private user: VOUserExt = new VOUserExt();
+  private user: VOUserExt;
 
   constructor(private http: Http) {
 
@@ -62,11 +62,13 @@ export class AuthHttpMy {
 
   logout() {
 
-    let url: string = VOSettings.server + '/logout?format=json';
+    let url: string = VOSettings.server + '/auth/logout?format=json';
+console.log(url);
     this.get(url).map(res=>res.json()).subscribe(res=>{
 
-      //this.isLogedInSub.next(false);
+     console.log(res);
       this.user = null;
+      this.userSub.next(null);
     });
   }
 
@@ -112,7 +114,7 @@ export class AuthHttpMy {
     let url: string = VOSettings.myProfile;
     return this.get(url)
       .map(res => {
-        console.log(res);
+       // console.log(res);
         let r: any = res.json();
         let out: VOUser = this.mapUserExt(r);
 

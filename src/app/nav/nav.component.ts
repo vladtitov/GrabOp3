@@ -18,6 +18,7 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
     this.authHttp.user$.subscribe(user => {
+      if(!user) return;
       this.profile_pic = user.profile_pic;
     });
   }

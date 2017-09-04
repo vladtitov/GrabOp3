@@ -33,7 +33,7 @@ export class AppComponent {
 
     auth.user$.subscribe(user=>{
       if(!user) return;
-      this.user=user
+     // this.user = user
     });
 
     // console.log('appp');

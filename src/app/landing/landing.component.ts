@@ -5,6 +5,7 @@ import {LoginPanelComponent} from '../app-login/login-panel/login-panel.componen
 import {Observable} from 'rxjs/Observable';
 import {AuthHttpMy} from '../services/auth-http';
 import {VOPost} from '../models/vos';
+import {MdDialog} from '@angular/material';
 
 @Component({
   selector: 'app-landing',
@@ -42,12 +43,24 @@ export class LandingComponent implements OnInit {
   constructor(
               private route: ActivatedRoute,
               private modal: ModalWindowService,
-              private auth:AuthHttpMy
+              private auth:AuthHttpMy,
+              private dialog:MdDialog
   ) {
     this.isLoggedIn$ = auth.isLogedIn$;
   }
 
   ngOnInit() {
+
+    this.auth.user$.subscribe(user=>{
+      console.warn(user)
+    })
+
+    this.auth.isLogedIn$.subscribe(res=>{
+
+      console.warn(res);
+    })
+
+
     let login = this.route.snapshot.params.login;
     if(login){
       console.log('login', login);
@@ -60,6 +73,14 @@ export class LandingComponent implements OnInit {
 
   loginClick(){
 
+    this.dialog.open(LoginPanelComponent, {
+      width:'400px',
+      height:'400px'
+    })
+  }
+
+  logOutClick(){
+    this.auth.logout()
   }
 
 }

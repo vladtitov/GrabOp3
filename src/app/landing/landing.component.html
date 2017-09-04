@@ -7,7 +7,7 @@
             <md-grid-tile [colspan]="5"></md-grid-tile>
             <div *ngIf="isLoggedIn$ | async">
                 <md-grid-tile><a md-raised-button color="primary" routerLink="/home">HOME</a></md-grid-tile>
-                <md-grid-tile><a md-raised-button color="accent" routerLink="/join-us">Logout</a></md-grid-tile>
+                <md-grid-tile><a md-raised-button color="accent" (click)="logOutClick($event)">Logout</a></md-grid-tile>
             </div>
             <div *ngIf="!(isLoggedIn$ | async)">
                 <md-grid-tile><a md-raised-button color="accent" routerLink="/join-us">JOIN US</a></md-grid-tile>
