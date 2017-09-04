@@ -1,6 +1,7 @@
 import {Component, Directive} from '@angular/core';
 import {AuthHttpMy} from './services/auth-http';
 import {VOUserExt} from './app-login/vouser';
+import {Observable} from 'rxjs/Observable';
 //import {trigger, state, style, transition, animate, keyframes, group} from '@angular/animations';
 
 
@@ -24,6 +25,7 @@ import {VOUserExt} from './app-login/vouser';
 export class AppComponent {
   title = 'AppComponent ';
   showMe:boolean = true;
+  isLoggedIn$:Observable<boolean>;
 
   user:VOUserExt;
 
@@ -31,6 +33,7 @@ export class AppComponent {
 
   constructor( auth:AuthHttpMy){
 
+    this.isLoggedIn$ = auth.isLogedIn$;
     auth.user$.subscribe(user=>{
       if(!user) return;
      // this.user = user

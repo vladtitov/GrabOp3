@@ -51,16 +51,6 @@ export class LandingComponent implements OnInit {
 
   ngOnInit() {
 
-    this.auth.user$.subscribe(user=>{
-      console.warn(user)
-    })
-
-    this.auth.isLogedIn$.subscribe(res=>{
-
-      console.warn(res);
-    })
-
-
     let login = this.route.snapshot.params.login;
     if(login){
       console.log('login', login);

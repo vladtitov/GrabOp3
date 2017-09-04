@@ -21,16 +21,13 @@
         </md-list>
     </md-sidenav>
 
-    <md-toolbar *ngIf='showMe'>
-        <div class='nav-wrapper'>
-            <a md-button (click)="sidenav.open()">
-                <md-icon>reorder</md-icon>
-            </a>
-            <app-nav></app-nav>
 
+    <md-toolbar  *ngIf="isLoggedIn$ | async">
+        <div class='nav-wrapper'>
+            <a class="fa fa-bars" (click)="sidenav.open()"> </a>
+            <app-nav></app-nav>
         </div>
     </md-toolbar>
-
 
     <router-outlet></router-outlet>
 
