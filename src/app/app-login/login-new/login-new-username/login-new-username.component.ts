@@ -52,7 +52,7 @@ export class LoginNewUsernameComponent implements OnInit,  OnDestroy {
     private modal: ModalWindowService,
     private loginNewService: LoginNewService
   ) {
-    this.person = authHttpMy.userExt;
+    //this.person = authHttpMy.userExt;
 
     this.sb1 = route.params.subscribe(params => {
       // console.log(params);
@@ -111,7 +111,7 @@ export class LoginNewUsernameComponent implements OnInit,  OnDestroy {
 
 
   ngOnInit(): void {
-    this.person = this.authHttpMy.userExt;
+    //this.person = this.authHttpMy.userExt;
     this.password = this.person.password;
     this.confirm = new FormControl(this.password, [(fc) => this.areEqual(this.password, fc)]);
   }

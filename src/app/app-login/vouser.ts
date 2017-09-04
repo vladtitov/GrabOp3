@@ -25,23 +25,7 @@ export class SOUser{
   user_name:string;
 }
 
-export function mapUserExt(user:SOUser):VOUser{
-  console.log('mapUserExt', user);
- return {
-    id:user.id,
-   // sessionId:'jj',
-    userId:user.id,
-    role:user.type,
-    username:user.user_name,
-    primaryEmail: user.primary_email,
-   // emailVisible?: boolean;
-    displayName:user.first_name,
-   // token?: string;
-    //isLogin?: boolean;
-    firstName:user.first_name + ' '+ user.last_name,
-    lastName: user.last_name
-  }
-}
+
 
 export class VOUser {
   id: string;

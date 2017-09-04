@@ -25,15 +25,17 @@ export class AppComponent {
   title = 'AppComponent ';
   showMe:boolean = true;
 
-  userExt:VOUserExt;
-  userS:any;
+  user:VOUserExt;
 
   state: string = 'out';
 
   constructor( auth:AuthHttpMy){
 
-    auth.user$.subscribe(user=>this.userExt=user);
-    auth.userS$.subscribe(user=>this.userS=user);
+    auth.user$.subscribe(user=>{
+      if(!user) return;
+      this.user=user
+    });
+
     // console.log('appp');
   }
 

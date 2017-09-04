@@ -304,14 +304,8 @@ export class VOOpportunity {
 
 
 export class VOSettings {
-  // static server:string = 'api/service.php?api=';
-  // static login:string ='api/login.php?api=';
-  // static posts: string = 'api/posts.php';
  // static server: string = 'http://grabop2api-dev.us-west-2.elasticbeanstalk.com/api/v1';
   static server: string = '/api/v1';
-
-  //static username: any = {password: 'mio,mio', username: 'al3kosvh@gmail.com'};
- // static authUrl: string = VOSettings.server +'/auth?format=json';
 
   static register: string = VOSettings.server +'/register?format=json';
   static verifyemail: string = VOSettings.server +'/verifyemail?format=json';

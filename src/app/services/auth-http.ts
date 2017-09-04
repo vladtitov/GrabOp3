@@ -8,7 +8,7 @@ import {
 } from '@angular/http';
 import {Observable}     from 'rxjs/Observable';
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import {mapUserExt, SOAuthenticateResponse, SOvAccount, VOUser, VOUserExt} from "../app-login/vouser";
+import {SOAuthenticateResponse, SOUser,  VOUser, VOUserExt} from "../app-login/vouser";
 import {Subject} from 'rxjs/Subject';
 import {VOSettings} from "../models/vos";
 
@@ -17,57 +17,39 @@ import {VOSettings} from "../models/vos";
 
 @Injectable()
 export class AuthHttpMy {
-  //auth:string;
+
   headers: Headers;
 
-  private isLogedInSub:BehaviorSubject<boolean>
   isLogedIn$:Observable<boolean>;
-
-
-  private userSub: BehaviorSubject<VOUser>;
+  private userSub: BehaviorSubject<VOUserExt>;
   user$: Observable<VOUserExt>;
-
-  private user: VOUser;
-  userExt: VOUserExt = new VOUserExt();
-
-
-  private userSubS: BehaviorSubject<any>;
-  userS$: Observable<any>;
-//
-  //{"id":16,"username":"al3kosvh@gmail.com","sessionId":"ILO5TXx1Gf5jpXn8UZMV"}
-
-  //authenticatedSub: Subject<boolean>;
-  //authenticated$: Observable<boolean>;
+  private user: VOUserExt = new VOUserExt();
 
   constructor(private http: Http) {
 
-    this.isLogedInSub = new BehaviorSubject(false);
-    this.isLogedIn$ = this.isLogedInSub.asObservable();
+    //this.isLogedInSub = new BehaviorSubject(false);
 
-   // this.authenticatedSub = new BehaviorSubject<boolean>(false);
-    //this.authenticated$ = this.authenticatedSub.asObservable();
 
-    this.userSub = new BehaviorSubject<VOUser>(this.userExt);
+    this.userSub = new BehaviorSubject<VOUserExt>(this.user);
     this.user$ = this.userSub.asObservable();
-
-
-    this.userSubS = new BehaviorSubject<any>(null);
-    this.userS$ = this.userSubS.asObservable();
+    this.isLogedIn$ = this.user$.map(user=>!!user);
 
     this.autoLogin();
   }
 
   autoLogin(): void {
-    let user: VOUser = this.getUser();
+   /* let user: VOUser = this.getUser();
     //TODO if expired error
-    console.log(user);
+    console.log('autologin ', user);
     if(!this.user){
       return;
     }
-    if(user) this.loginUser(user);
-    this.getUsersExtended(user).subscribe(user => {
-      //console.log(user);
-      this.userSub.next(user);
+*/
+    this.getUsersExtended().subscribe(user => {
+
+      console.log(user);
+      this.user = user;
+      this.userSub.next(this.user);
     });
 
   }
@@ -83,10 +65,9 @@ export class AuthHttpMy {
     let url: string = VOSettings.server + '/logout?format=json';
     this.get(url).map(res=>res.json()).subscribe(res=>{
 
-      this.isLogedInSub.next(false);
-    })
-
-    //localStorage.removeItem("account");
+      //this.isLogedInSub.next(false);
+      this.user = null;
+    });
   }
 
 
@@ -96,7 +77,7 @@ export class AuthHttpMy {
 
     // let url: string = 'http://ec2-34-209-89-37.us-west-2.compute.amazonaws.com/api/v1/auth?format=json';
     let url: string = VOSettings.server + '/auth?format=json';
-console.log(url, username, password);
+    console.log(url, username, password);
     this.http.post(url, {username:username, password:password}).map(res => {
       let r: SOAuthenticateResponse = res.json();
       console.log(r);
@@ -109,14 +90,11 @@ console.log(url, username, password);
       user.token = r.SessionId;
       return user;
     }).catch(this.handleError).subscribe(user => {
-
       ///TODO make sure user is valid
+      //this.loginUser(user);
+      this.saveUser(user);
 
-
-      this.loginUser(user);
-      this.saveUser();
-
-      this.getUsersExtended(user).subscribe(
+      this.getUsersExtended().subscribe(
         user => {
           sub.next(user);
           this.userSub.next(user);
@@ -129,51 +107,48 @@ console.log(url, username, password);
 
   }
 
-  getUsersExtended(user: VOUser) {
+  getUsersExtended() {
     // let url: string = 'http://ec2-34-209-89-37.us-west-2.compute.amazonaws.com/api/v1/profiles/me?format=json';
     let url: string = VOSettings.myProfile;
     return this.get(url)
       .map(res => {
-       // console.warn('  getUsersExtended', res.json());
+        console.log(res);
         let r: any = res.json();
-        this.userSubS.next(r)
-       // console.log(r);
-        let out: VOUser = mapUserExt(r);
-        // out.id = r.Id;
-        // out.role =1;
-        // out.userName = r.userName;
-        // out.PrimaryEmail = r.PrimaryEmail;
-        // out.displayName = r.displayName;
-        // out.profile_pic = r.profile_pic;
-        // out.jobtitle = r.jobtitle;
-        // out.company = r.company;
-        // out.firstName = r.firstName;
-        // out.lastName = r.lastName;
-        // out.occupation = r.occupation;
-        // out.offers = r.offers;
-        // out.needs = r.needs;
-        // out.numberOfOpps = r.numberOfOpps;
+        let out: VOUser = this.mapUserExt(r);
 
-        // console.log('profile ', res);
-        //console.log('out ', out);
         return out;
       })
       .catch(this.handleError)
 
   }
 
+
+  private mapUserExt(user:SOUser):VOUser{
+    //console.log('mapUserExt', user);
+    return {
+      id:user.id,
+      userId:user.id,
+      role:user.type,
+      username:user.user_name,
+      primaryEmail: user.primary_email,
+      // emailVisible?: boolean;
+      displayName:user.first_name,
+      // token?: string;
+      //isLogin?: boolean;
+      firstName:user.first_name + ' '+ user.last_name,
+      lastName: user.last_name
+    }
+  }
+
   handleError(error: any) {
-    console.log(error);
-    //this.id++;
-    // if(this.id<1000) this.loadProfile();
-    let errMsg = (error.message) ? error.message :
-      console.error(error);
+    let errMsg = (error.statusText) ? error.statusText : 'Error';
+    //  console.error(error);
+    //return error;;
     return Observable.throw(errMsg);
   }
 
 
-  getUser(): VOUser {
-    // if(!this.us)
+  private getUser(): VOUser {
     if (!this.user) {
       let str = localStorage.getItem('authentication');
       try {
@@ -185,15 +160,10 @@ console.log(url, username, password);
     return this.user;
   }
 
-  saveUser(): void {
-    localStorage.setItem('authentication', btoa(JSON.stringify(this.user)));
-    //this.authenticatedSub.next(true);
+  saveUser(user:VOUser): void {
+    localStorage.setItem('authentication', btoa(JSON.stringify(user)));
   }
 
-  loginUser(user?: VOUser){
-    this.user = user
-    this.isLogedInSub.next(true);
-  }
   getToken(): string {
     let user: VOUser = this.getUser();
     return user ? user.token : null;
@@ -214,14 +184,12 @@ console.log(url, username, password);
     return this.headers;
   }
 
-  /*  isUser():boolean{
-   let user = this.getUser();
-   return (user && user.id)?true:false;
-   }*/
+
 
   removeAuthentication(): void {
-    this.userExt = null;
-    this.isLogedInSub.next(false);
+    this.user = null;
+    this.userSub.next(null);
+   // this.isLogedInSub.next(false);
     //this.authenticatedSub.next(false);
     localStorage.removeItem('authentication');
   }

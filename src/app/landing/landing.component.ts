@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ModalWindowService} from '../services/modal-window.service';
 import {LoginPanelComponent} from '../app-login/login-panel/login-panel.component';
+import {Observable} from 'rxjs/Observable';
+import {AuthHttpMy} from '../services/auth-http';
+import {VOPost} from '../models/vos';
 
 @Component({
   selector: 'app-landing',
@@ -10,6 +13,8 @@ import {LoginPanelComponent} from '../app-login/login-panel/login-panel.componen
   providers: []
 })
 export class LandingComponent implements OnInit {
+
+  isLoggedIn$:Observable<boolean>;
 
   summaryData: any[] = [
     {
@@ -31,8 +36,16 @@ export class LandingComponent implements OnInit {
 
   ];
 
-  constructor(private route: ActivatedRoute,
-              private modal: ModalWindowService) { }
+
+  postNeed:VOPost[] = [];
+
+  constructor(
+              private route: ActivatedRoute,
+              private modal: ModalWindowService,
+              private auth:AuthHttpMy
+  ) {
+    this.isLoggedIn$ = auth.isLogedIn$;
+  }
 
   ngOnInit() {
     let login = this.route.snapshot.params.login;
@@ -42,6 +55,11 @@ export class LandingComponent implements OnInit {
         console.log('LoginPanelComponent  ', res);
       })
     }
+  }
+
+
+  loginClick(){
+
   }
 
 }
